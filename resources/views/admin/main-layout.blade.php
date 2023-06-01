@@ -14,6 +14,9 @@
         content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard">
     <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
     <meta property="og:type" content="website">
+
+    <link rel="stylesheet" type="text/css"  href="/css2/bootstrap-tagsinput.css.css">
+
     <meta property="og:url" content="https://demo.themesberg.com/volt-pro">
     <meta property="og:title" content="Volt Premium Bootstrap Dashboard - Transactions">
     <meta property="og:description"
@@ -51,6 +54,7 @@
         rel="stylesheet">
     <link type="text/css" href="https://demo.themesberg.com/volt-pro/vendor/leaflet/dist/leaflet.css" rel="stylesheet">
     <link type="text/css" href="https://demo.themesberg.com/volt-pro/css/volt.css" rel="stylesheet">
+   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141734189-6"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -356,6 +360,7 @@
             </div>
         </footer>
     </main>
+    <script src="/js1/bootstrap-tagsinput.js" ></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/onscreen/dist/on-screen.umd.min.js"></script>
@@ -423,7 +428,29 @@
         src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
         integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
         data-cf-beacon='{"rayId":"7bea8b69fecb37c7","version":"2023.3.0","r":1,"b":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","si":100}'
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
+
+        <script>
+
+            $(document).ready(
+                
+                function(){
+                    $('#role_name').keyup(
+                        function(e){
+                            alert("YO");
+                            var str  =  $('#role_name').val();
+                            str = str.replace(/\W+(?!$)/g,'-').toLowerCase();
+                            $('#role_slug').val(str);
+                            $('#role_slug').attr('placeholer',str);
+                        }
+                    );
+                }
+            );
+
+        </script>
+
+        
 </body>
 
 </html>

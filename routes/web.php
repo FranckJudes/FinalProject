@@ -4,8 +4,8 @@ use App\Http\Controllers\Auth\AuthentificationController;
 use App\Http\Controllers\Auth\dashboardController;
 use App\Http\Controllers\Docs\DocumentController;
 use App\Http\Controllers\Errors\errorController;
+use App\Http\Controllers\Roles\RolesController;
 use App\Http\Controllers\Utilisateur\UtilisateurController;
-use App\Models\Utilisateur;
 use Illuminate\Support\Facades\Route;
 
 
@@ -66,5 +66,16 @@ Route::controller(errorController::class)->group(
     function(){
         Route::get("404","index")->name("error404");
         Route::get("500","page500")->name("error500");
+    }
+);
+
+
+// Gestion de Role
+
+ Route::resource('roles','App\Http\Controllers\Roles\RolesController');
+
+Route::controller(RolesController::class)->group(
+    function(){
+        Route::get("role/index","index");
     }
 );
