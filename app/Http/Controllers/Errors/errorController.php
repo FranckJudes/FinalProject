@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Errors;
 
 use App\Http\Controllers\Controller;
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class errorController extends Controller
 {
     public function index()
     {
+       
         return view("errors.404");
     }
 

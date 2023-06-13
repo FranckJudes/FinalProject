@@ -36,7 +36,7 @@ class UtilisateurController extends Controller
             'name' =>  $request->name,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'password' =>Hash::make($request->password)
+            'password' => Hash::make($request->password)
             
         ]);
 
@@ -69,6 +69,7 @@ class UtilisateurController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'lastname' => $request->lastname,
             'password' => $request->password
         ]);
         return
@@ -81,4 +82,8 @@ class UtilisateurController extends Controller
         return
                 view('admin.updateUtilisateur',compact('data'));
     }
+    
+    
+    
+    
 }

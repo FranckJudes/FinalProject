@@ -18,7 +18,7 @@ class RolesController extends Controller
         $roles =  Role::orderBy("id","desc")->get();
 
         return view("admin.Roles.index",compact("roles"));
-        dd($roles);
+        
     }
 
     /**
@@ -104,6 +104,7 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        dd($role);
         $role->delete();
 
         redirect('/roles');

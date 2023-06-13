@@ -76,6 +76,6 @@ Route::controller(errorController::class)->group(
 
 Route::controller(RolesController::class)->group(
     function(){
-        Route::get("role/index","index");
+        Route::get("destroyRole","destroy");
     }
 );

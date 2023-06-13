@@ -360,7 +360,39 @@
             </div>
         </footer>
     </main>
-    <script src="/js1/bootstrap-tagsinput.js" ></script>
+   
+    
+    <script>
+        alert(1);
+        console.log(1);
+
+        $("#name").on.('keyup',function(){
+            console.log("Q");
+        });
+        // $('#name').on('keyup', function() {
+        //     $value = $(this).val();
+
+        //     // Ajoutez votre logique ici en utilisant la variable $value.
+        //     console.log("La valeur entrée est : " + $value);
+        // });
+                // $('#role_name').on('keyup',function()
+                // {
+                    
+                // }
+                  
+                        // function(){
+                        //     alert("YO");
+                        //     var str  =  $('#role_name').val();
+                        //     str = str.replace(/\W+(?!$)/g,'-').toLowerCase();
+                        //     $('#role_slug').val(str);
+                        //     $('#role_slug').attr('placeholer',str);
+                        // }
+                 
+               
+           
+
+        </script>
+     <script src="/js1/bootstrap-tagsinput.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/onscreen/dist/on-screen.umd.min.js"></script>
@@ -431,24 +463,7 @@
         crossorigin="anonymous">
     </script>
 
-        <script>
-
-            $(document).ready(
-                
-                function(){
-                    $('#role_name').keyup(
-                        function(e){
-                            alert("YO");
-                            var str  =  $('#role_name').val();
-                            str = str.replace(/\W+(?!$)/g,'-').toLowerCase();
-                            $('#role_slug').val(str);
-                            $('#role_slug').attr('placeholer',str);
-                        }
-                    );
-                }
-            );
-
-        </script>
+  
 
         
 </body>

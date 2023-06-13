@@ -10,8 +10,10 @@
                 
                     <div class="col-lg-12 col-sm-6">
 
-                        <div class="mb-4"><label for="titre">Name</label> <input type="text" class="form-control"
-                            id="name" name="name" value="{{$data->name}}" aria-describedby="emailHelp" placeholder="name">
+                        <div class="mb-4"><label for="titre">Name</label> 
+                            <input type="text" class="form-control" id="name" name="name" value="{{$data->name}}" aria-describedby="emailHelp" placeholder="name">
+
+
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif

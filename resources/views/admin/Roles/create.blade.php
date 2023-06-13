@@ -12,8 +12,8 @@
                 
                     <div class="col-lg-12 col-sm-6">
 
-                        <div class="mb-4"><label for="titre">Name</label> <input type="text" class="form-control"
-                            id="role_name" name="role_name" aria-describedby="emailHelp" placeholder="role_name" value="{{old('role_name')}}">
+                        <div class="mb-4"><label for="titre">Name</label> 
+                            <input type="text" class="form-control" id="name" name="role_name" aria-describedby="emailHelp" placeholder="role_name" value="{{old('role_name')}}">
                             @if ($errors->has('role_name'))
                                 <span class="text-danger">{{ $errors->first('role_name') }}</span>
                             @endif
