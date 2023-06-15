@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('utilisateurs_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('utilisateur_id');
             $table->unsignedBigInteger('permission_id');
         
              
-            $table->foreign('user_id')->references('id')->on('utilisateurs')->onDelete('cascade');  
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');  
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-            $table->unique(['user_id', 'permission_id']);
+            $table->unique(['utilisateur_id', 'permission_id']);
  
         });
     }

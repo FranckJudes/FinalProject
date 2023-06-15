@@ -22,7 +22,7 @@ trait HasRoleAndPermissions
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class,'utilisateurs_permisssions');
+        return $this->belongsToMany(Permission::class,'utilisateurs_permissions');
     }
     
 }

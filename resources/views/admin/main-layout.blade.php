@@ -460,17 +460,45 @@
 
     <script>
 
+      
         $(document).ready(function(){
-            var permission_box = $('#permisssions_box');
+            var permission_box = $('#permissions_box');
             var permisssions_checkbox_list = $('#permissions_checkbox_list');
+            
             permission_box.hide();
 
             $('#role').on('change', function(){
                 var role = $(this).find(':selected');
                 var role_id = role.data('role-id');
                 var role_slug = role.data('role-slug');
-                console.log(role_slug);
-            })
+                 console.log(role_id);
+                permisssions_checkbox_list.empty();
+
+                $.ajax({
+                    url: "/ajoutUtilisateur",
+                    method: "get",
+                    dataType: 'json',
+                    data:{
+                        role_id : role_id,
+                        role_slug : role_slug,
+                    }
+                }).done(function(data){
+                    console.log(data);
+
+                    permission_box.show(data);
+
+                    $.each(data,function(index,element)
+                    {
+                        $(permisssions_checkbox_list).append(
+                            `<div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="`+ element.id+`" id="defaultCheck10" name="permissions[]">
+                                 <label class="form-check-label" for="`+ element.slug +`"> `+element.name+`</label>
+                            </div>`
+                        );
+                    });
+                });
+
+            });
         });
     </script>
 

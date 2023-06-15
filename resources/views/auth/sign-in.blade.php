@@ -112,7 +112,7 @@
                                                 </path>
                                             </svg> </span>
                                             <input type="email" name="email" class="form-control"
-                                            placeholder="example@gmail.com" id="email"></div>
+                                            placeholder="example@gmail.com" value="{{old('email')}}" id="email"></div>
                                        
                                                 @error('email')
                                                      <span class="text-danger">
@@ -133,7 +133,7 @@
                                                 </svg> </span>
                                             <input type="password" placeholder="Password" name="password"
                                                 class="form-control" id="password"></div>
-                                                @error('email')
+                                                @error('password')
                                                     <span class="text-danger">
                                                         {{$message}}
                                                     </span>

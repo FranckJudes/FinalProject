@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row mb-12">
                 
-                    <div class="col-lg-12 col-sm-6">
+                    <div class="col-lg-12">
 
                                 <div class="mb-4"><label for="titre">Name</label> <input type="text" class="form-control"
                                     id="name" name="name" aria-describedby="emailHelp"  value="{{old('name')}}" placeholder="name">
@@ -48,8 +48,9 @@
                                 </div>
                                 <div class="mb-3">
                                         <label class="my-1 me-2" for="state">Selectionner le role :</label>
-                                         <select id="state" id="role"
+                                         <select  id="role" 
                                             class="w-100" name="role">
+                                            <option selected="selected">Choississez un role :</option>
                                             @foreach ($roles as $role )
                                                 <option data-role-id="{{$role->id}}" data-role-slug="{{$role->slug}}" value="{{$role->id}}">
                                                     {{$role->name}}
@@ -58,11 +59,9 @@
                                         </select>
                                  </div>
                                  <div class="mb-3" id="permissions_box">
-                                    <label class="my-1 me-2" for="states">Selectionner les permisssions :</label>
+                                        <div class="mb-3"><span class="h6 fw-bold">Selectionner Permission :</span></div>
                                         <div id="permissions_checkbox_list"></div>
                                 </div>
-
-
                                 <div class="mb-3">
                                     <input class="btn btn-primary" class="input-group" type="submit">
                                 </div>

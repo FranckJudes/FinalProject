@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('utilisateurs_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('utilisateur_id');
             $table->unsignedBigInteger('role_id');
         
              
-            $table->foreign('user_id')->references('id')->on('utilisateurs')->onDelete('cascade');  
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');  
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->unique(['user_id', 'role_id']);
+            $table->unique(['utilisateur_id', 'role_id']);
  
         });
     }

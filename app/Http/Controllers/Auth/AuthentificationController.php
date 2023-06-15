@@ -38,7 +38,7 @@ class AuthentificationController extends Controller
 
                // Renvoyer aau login en cas d'erreur avec l'identifiant du email
                return  to_route('PageLogin')->withErrors([
-                        'email' => 'email Invalide',
+                        'email' => 'Email Invalide',
                         'password' => 'Mot de passe Incorrect'
                ])->onlyInput('email','password');
                 

@@ -18,15 +18,26 @@ class UtilisateurController extends Controller
             view('admin.list-utilisateur', compact('utilisateurs'));
     }
 
-    public function addPage()
+    public function addPage(Request $request)
     {
+        if ($request->ajax()) {    
+           $roles =  Role::where('id',$request->role_id)->first();
+           
+           $permissions =  $roles->permissions;
+
+           return $permissions;
+        }
+
+
+        
         $roles = Role::all();
-        // dd($role);
+      
         return 
             view('admin.addUtilisateur',compact('roles'));    
     }
     public function create(Request $request)
     {
+      
         $creditials = $request->validate([
               'name' => 'required',
               'lastname' => 'required',
@@ -35,14 +46,30 @@ class UtilisateurController extends Controller
               'confirm_password' => 'required|same:password|min:6'  
         ]);
 
-        Utilisateur::create([
-            'name' =>  $request->name,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-            
-        ]);
+       
+        $utilisateur =  new Utilisateur;
 
+        $utilisateur->name = $request->name;
+        $utilisateur->lastName = $request->lastname;
+        $utilisateur->email = $request->email;
+        $utilisateur->password = Hash::make($request->password);
+        
+        $utilisateur->save();
+         
+        if($request->role != null){
+            $utilisateur->roles()->attach($request->role);
+            $utilisateur->save();
+        }
+
+        if($request->permissions != null){
+            
+           
+            foreach($request->permissions as $permission)
+            {
+              $utilisateur->permissions()->attach($permission);
+              $utilisateur->save();
+            }
+        }
         return to_route('list-utilisateur');
     }
 
