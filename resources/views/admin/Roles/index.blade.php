@@ -18,7 +18,18 @@
         <td><span class="fw-normal">{{$item->id}}</span></td>
         <td><span class="fw-normal">{{$item->name}}</span></td>
         <td><span class="fw-normal">{{$item->slug}}</span></td>
-        <td><span class="fw-normal">admin</span></td>
+        <td><span class="fw-normal">
+          
+          @if ($item->permissions != null)
+
+            @foreach ($item->permissions as $permission)
+              <span class="btn btn-primary">
+                   {{$permission->name}}
+              </span>  
+            @endforeach
+          @else
+          @endif
+        </span></td>
         <td>
           <div class="btn-group"><button
               class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown"
@@ -41,9 +52,10 @@
                     </svg>
                      Update 
                  </a>
-                 <form action="post" action="/roles/{{$item->id}}">
-                    @method("DELETE")
-                    @csrf 
+               
+                 <form method="post" action="/roles/{{$item->id}}">
+                  @method('DELETE')
+                  @csrf
                     <input type="hidden" name="role_id"  value="">
                         <button class="dropdown-item d-flex align-items-center">
                             <svg

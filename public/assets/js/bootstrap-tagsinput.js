@@ -1,3 +1,5 @@
+// bootstrap-tagsinput.js file - add in local
+
 (function ($) {
   "use strict";
 

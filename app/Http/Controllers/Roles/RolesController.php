@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -39,12 +40,13 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
+       
+        
+        // Au niveau de la validation
+        $request->validate([
                 'role_name' => 'required',
                 'role_slug' => 'required'
-            ]
-            );
+             ]);
 
         $role = new Role;
 
@@ -52,6 +54,22 @@ class RolesController extends Controller
         $role->slug = $request->role_slug;
 
         $role->save();
+
+        $listeDePermission = explode(',',$request->roles_permission);
+        //  dd($listeDePermission); 
+        
+        foreach ($listeDePermission as $permission) {
+            $permissions =  new Permission();
+            $permissions->name = $permission;
+            $permissions->slug = strtolower(str_replace("","-",$permission));
+            $permissions->save();
+
+            $role->permissions()->attach($permissions->id);
+            
+            $role->save();
+    
+        }
+        
 
         return redirect('/roles');
          
@@ -88,11 +106,29 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $role->name = $request->name;
-        $role->slug = $request->slug;
-
+        $role->name = $request->role_name;
+        $role->slug = $request->role_slug;
         $role->save();
 
+       
+        $role->permissions()->detach();
+        $role->permissions()->delete();
+        
+        
+        $listeDePermission = explode(',',$request->roles_permission);
+        //  dd($listeDePermission); 
+        
+        foreach ($listeDePermission as $permission) {
+            $permissions =  new Permission();
+            $permissions->name = $permission;
+            $permissions->slug = strtolower(str_replace("","-",$permission));
+            $permissions->save();
+
+            $role->permissions()->attach($permissions->id);
+            
+            $role->save();
+    
+        }
         return redirect('/roles');
     }
 
@@ -104,9 +140,10 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
-        dd($role);
+        $role->permissions()->delete();
         $role->delete();
-
-        redirect('/roles');
+        $role->permissions()->detach();
+        
+        return redirect('/roles');
     }
 }

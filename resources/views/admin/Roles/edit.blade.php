@@ -11,27 +11,29 @@
             <div class="card-body">
                 <div class="row mb-12">
                 
-                    <div class="col-lg-12 col-sm-6">
+                    <div class="col-lg-12">
 
                         <div class="mb-4"><label for="titre">Role du nom</label> <input type="text" class="form-control"
-                            id="name" name="name" aria-describedby="emailHelp"  value="{{ $role->name}}">
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            id="role_name" name="role_name" aria-describedby="emailHelp"  value="{{ $role->name}}">
+                            @if ($errors->has('role_name'))
+                                <span class="text-danger">{{ $errors->first('role_name') }}</span>
                             @endif
                         </div>
 
                         <div class="mb-4"><label for="titre">le Slug du nom</label> <input type="text" class="form-control"
-                            id="name" name="slug" aria-describedby="emailHelp" value="{{ $role->name}}">
-                            @if ($errors->has('lastname'))
-                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
+                            id="role_slug" name="role_slug" aria-describedby="emailHelp" value="{{ $role->slug}}">
+                            @if ($errors->has('role_slug'))
+                                <span class="text-danger">{{ $errors->first('role_slug') }}</span>
                             @endif
                         </div>
-                        <div class="mb-4"><label for="titre">Add la Permission</label> <input type="text" class="form-control"
-                            id="name" name="permission" aria-describedby="emailHelp" name="roles_permisssion" value="">
-                            @if ($errors->has('lastname'))
-                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
+                        <div class="mb-4"><label for="titre">Add Permission</label> 
+                            <input type="text" class="form-control" aria-describedby="emailHelp"  name="roles_permission" data-role="tagsinput" value="@foreach ($role->permissions as $permission){{$permission->name. ","}} @endforeach">
+                                
+                            
+                            @if ($errors->has('roles_permission'))
+                                <span class="text-danger">{{ $errors->first('roles_permission') }}</span>
                             @endif
-                        </div>  
+                        </div>     
                         <input class="btn btn-primary" type="submit">
                     </div>
                 </div>

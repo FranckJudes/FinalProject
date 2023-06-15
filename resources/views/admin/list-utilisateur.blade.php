@@ -7,8 +7,8 @@
       <tr>
         <th class="border-bottom">name</th>
         <th class="border-bottom">email</th>
-        <th class="border-bottom">password</th>
         <th class="border-bottom">Role</th>
+        <th class="border-bottom">Permisssion</th>
         <th class="border-bottom">Action</th>
       </tr>
     </thead>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Utilisateur;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +20,10 @@ class UtilisateurController extends Controller
 
     public function addPage()
     {
+        $roles = Role::all();
+        // dd($role);
         return 
-            view('admin.addUtilisateur');    
+            view('admin.addUtilisateur',compact('roles'));    
     }
     public function create(Request $request)
     {

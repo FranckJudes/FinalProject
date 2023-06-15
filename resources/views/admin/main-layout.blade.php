@@ -14,9 +14,6 @@
         content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard">
     <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
     <meta property="og:type" content="website">
-
-    <link rel="stylesheet" type="text/css"  href="/css2/bootstrap-tagsinput.css.css">
-
     <meta property="og:url" content="https://demo.themesberg.com/volt-pro">
     <meta property="og:title" content="Volt Premium Bootstrap Dashboard - Transactions">
     <meta property="og:description"
@@ -55,6 +52,7 @@
     <link type="text/css" href="https://demo.themesberg.com/volt-pro/vendor/leaflet/dist/leaflet.css" rel="stylesheet">
     <link type="text/css" href="https://demo.themesberg.com/volt-pro/css/volt.css" rel="stylesheet">
    
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141734189-6"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -81,6 +79,18 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
     </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" >
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap-tagsinput.css')}}">  
+    <style>
+            .label-info{
+                background-color: rgb(0, 173, 241);
+                padding: 2px;
+                border-radius: 2px; 
+            }
+    </style>    
 </head>
 
 <body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
@@ -362,43 +372,13 @@
     </main>
    
     
-    <script>
-        alert(1);
-        console.log(1);
+</body>
 
-        $("#name").on.('keyup',function(){
-            console.log("Q");
-        });
-        // $('#name').on('keyup', function() {
-        //     $value = $(this).val();
-
-        //     // Ajoutez votre logique ici en utilisant la variable $value.
-        //     console.log("La valeur entrée est : " + $value);
-        // });
-                // $('#role_name').on('keyup',function()
-                // {
-                    
-                // }
-                  
-                        // function(){
-                        //     alert("YO");
-                        //     var str  =  $('#role_name').val();
-                        //     str = str.replace(/\W+(?!$)/g,'-').toLowerCase();
-                        //     $('#role_slug').val(str);
-                        //     $('#role_slug').attr('placeholer',str);
-                        // }
-                 
-               
-           
-
-        </script>
-     <script src="/js1/bootstrap-tagsinput.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/onscreen/dist/on-screen.umd.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/nouislider/distribute/nouislider.min.js"></script>
-    <script src="https://demo.themesberg.com/volt-pro/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js">
-    </script>
+    <script src="https://demo.themesberg.com/volt-pro/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/countup.js/dist/countUp.umd.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/apexcharts/dist/apexcharts.min.js"></script>
     <script src="https://demo.themesberg.com/volt-pro/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
@@ -464,8 +444,43 @@
     </script>
 
   
+    <script src="{{asset('assets/js/bootstrap-tagsinput.js')}}"></script>
+    <script>
+       
+        $(document).ready(function(){
+            $('#role_name').keyup(function(e){
+                var str = $('#role_name').val();
+                str =  str.replace(/\W+(?!$)/g,'-').toLowerCase();
+                $('#role_slug').val(str);
+                $('#role_slug').attr('placeholder',str);
+            });
+        });
 
-        
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+            var permission_box = $('#permisssions_box');
+            var permisssions_checkbox_list = $('#permissions_checkbox_list');
+            permission_box.hide();
+
+            $('#role').on('change', function(){
+                var role = $(this).find(':selected');
+                var role_id = role.data('role-id');
+                var role_slug = role.data('role-slug');
+                console.log(role_slug);
+            })
+        });
+    </script>
+
 </body>
 
-</html>
+</html> 
+
+
+
+
+
+
+

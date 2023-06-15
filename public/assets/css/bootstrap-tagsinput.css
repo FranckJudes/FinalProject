@@ -1,3 +1,5 @@
+/* bootstrap-tagsinput.css file - add in local */
+
 .bootstrap-tagsinput {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -7,8 +9,8 @@
   color: #555;
   vertical-align: middle;
   border-radius: 4px;
-  max-width: 100%;
-  line-height: 22px;
+  width: 100%;
+  
   cursor: text;
 }
 .bootstrap-tagsinput input {
