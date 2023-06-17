@@ -18,8 +18,8 @@
 3. Creer le fichier .env  grace a la commande :`$ cp .env.example .env`
 4. Generer la cle de l'application grace a la commande: `$ php artisan key:generate`
 5. Faire migrer les tables vers La base de donnee: `$ php artisan migrate`
-7.Executer L'application: `$ php artisan serve` et acceder a l'application grace a L'URL 
-8. Profiter !!!
+6. Executer L'application: `$ php artisan serve` et acceder a l'application grace a L'URL 
+7. Profiter !!!
 
 
 
