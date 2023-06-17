@@ -81,7 +81,7 @@ class DocumentController extends Controller
                     {
                         return   $q->whereDate('datePublication',$todayDate);
                     })
-            ->whereDate('datePublication',$todayDate)->paginate(10);
+            ->whereDate('datePublication',$todayDate)->paginate(3);
 
             
             return view('Acceuil.index',compact('documents'));   
@@ -120,6 +120,11 @@ class DocumentController extends Controller
         }
 
 
-        // 
+        // Telechargement Des Images du site
+
+        function download($id)
+        {
+            
+        }
         
 }

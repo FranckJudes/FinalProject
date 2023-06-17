@@ -37,6 +37,8 @@
                 </div>
             </div>
         </div>
+                
+        {{ $documents->links() }}
     </div>
 </section>
     

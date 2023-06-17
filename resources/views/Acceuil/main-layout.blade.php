@@ -72,11 +72,11 @@
                        <div class="col-lg-3"></div>
                    </div>
                    <div class="row mt-2">
-                    <div class="col-lg-5"></div>
-                        <div class="col-lg-3">
+                    <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
                             <input type="submit" class="form-control" value="Rechercher">
                         </div>
-                        <div class="col-lg-3"></div>
+                        <div class="col-lg-4"></div>
                    </div>
                </div> 
             </form> 

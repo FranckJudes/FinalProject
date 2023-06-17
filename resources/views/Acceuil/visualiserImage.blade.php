@@ -15,6 +15,8 @@
                 Autheur :     <p>{{ $documents->autheur }}</p>
                 Niveau Academique :     <p>{{ $documents->niveauAcademique }}</p>
                 Description :     <p>{{ $documents->description }}</p>
+
+            <a class="btn btn-primary" href="{{url('download',$documents->id)}}"> Download</a>
             <div class="row mt-4">
                 @foreach ($images as $image)
                     <div class="card text-white bg-secondary m-3 text-center" style="max-width:40em;">
