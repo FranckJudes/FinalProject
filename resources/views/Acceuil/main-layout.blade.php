@@ -38,11 +38,48 @@
                     <p class="lead fw-normal text-white-50 mb-0">DEPARTEMENT INFORMATIQUE - FACULTES DES SCIENCES</p>
                 </div>
             </div>
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white ">
-                    <input type="search" name="search"  class="form-control border-success rounded-pill" placeholder="search"/>
-                </div>
-            </div>
+           <form action="" method="get">
+               <div class="row">
+                <div class="col-lg-3 pt-5"></div>
+                   <div class="col-lg-6">
+                       <div class="text-center text-white ">
+                           <input type="search" name="search"  class="form-control border-success rounded-pill" placeholder="search"/>
+                       </div>
+                   </div>
+               <div class="col-lg-3"></div>
+               </div>   
+               <div class="row text-center text-white">
+                   <div class="col-lg-3"></div>
+                        <div class="col-lg-3">
+                            <label  class="form-label">En Fonction Date :</label>
+                            <input type="date" name="datePublication" value="{{ Request::get('datePublication') ?? date('Y-m-d')}}" class="form-control">
+                        </div>
+                        <div class="col-lg-3">
+                            <label  class="form-label">Selectionner la filiere :</label>
+                                <select name="niveauAcademique"  class="form-control">
+                                    <option value="">ALL</option>
+                                    <option value="ICTL1"  {{ Request::get('niveauAcademique') == 'ICTL1' ? 'selected' : ''}}>ICTL1</option>
+                                    <option value="ICTL2"  {{ Request::get('niveauAcademique') ==  'ICTL2' ? 'selected' : ''}}>ICTL2</option>
+                                    <option value="ICTL3"  {{ Request::get('niveauAcademique') == 'ICTL3' ? 'selected' : ''}}>ICTL3</option>
+                                    <option value="INFOL1" {{ Request::get('niveauAcademique') == 'INFOL1' ? 'selected' : ''}}>INFOL1</option>
+                                    <option value="INFOL2" {{ Request::get('niveauAcademique') == 'INFOL2' ? 'selected' : ''}}>INFOL2</option>
+                                    <option value="INFOL3" {{ Request::get('niveauAcademique') == 'INFOL3' ? 'selected' : ''}}>INFOL3</option>
+                                    <option value="M1" {{ Request::get('niveauAcademique') == 'M1' ? 'selected' : ''}}>M1</option>
+                                    <option value="M2" {{ Request::get('niveauAcademique') == 'M2' ? 'selected' : ''}}>M2</option>
+        
+                            </select>
+                        </div>
+                       <div class="col-lg-3"></div>
+                   </div>
+                   <div class="row mt-2">
+                    <div class="col-lg-5"></div>
+                        <div class="col-lg-3">
+                            <input type="submit" class="form-control" value="Rechercher">
+                        </div>
+                        <div class="col-lg-3"></div>
+                   </div>
+               </div> 
+            </form> 
            
         </header>
         

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('autheur');
             $table->string('datePublication')->nullable();
             $table->enum('niveauAcademique',['INFOL1','INFOL2','INFOL3','ICTL1','ICTL2','ICTL3','M1','M2','ALL'])->default('ALL');
-            $table->enum('categorie',['Emploi de Temps','Notes','Communique','Liste de Selection']);
+            $table->enum('categorie',['Emploi de Temps','Notes','Communique','Liste de Selection','Liste Admin','Annonces','Avis de Recherche']);
             $table->timestamps();
         });
     }

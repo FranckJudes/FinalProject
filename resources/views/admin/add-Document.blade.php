@@ -52,10 +52,12 @@
                             id="country" aria-label="Default select example" name="categorie">
                             <option selected="selected" disabled>Open this select menu</option>
                             <option>Emploi de Temps</option>
-                            <option>Communiques</option>
+                            <option>Communique</option>
                             <option>Notes</option>
-                            <option>Listes d'admin</option>
-                            <option>Listes de  selections</option>
+                            <option>Liste Admin</option>
+                            <option>Liste de Selection</option>
+                            <option>Annonces</option>
+                            <option>Avis de Recherche</option>
                             </select>
                             @error('categorie')
                                 <span class="text-danger">{{$message}}</span>

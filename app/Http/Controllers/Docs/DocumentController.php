@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestDocuments;
 use App\Models\Documents;
 use App\Models\Images;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -51,6 +52,8 @@ class DocumentController extends Controller
         return redirect()->back()->with('success','Ajout avec success');
     }
 
+
+    // Lister L'historique de tous les Documents
     public function historique()
         {
                 $documents = Documents::all();
@@ -58,9 +61,29 @@ class DocumentController extends Controller
                 return view('admin.historiqueDocument',compact('documents'));
         }
 
-        public function acceuil()
+        // page d'acceuil de l'Etudiant et Recherche
+
+        public function acceuil(Request $request)
         {
-            $documents =  Documents::all();
+            
+            // $documents =  Documents::all();
+            $todayDate =  Carbon::now()->format('Y-m-d');
+            
+            $documents = Documents::when($request->datePublication != null, function($q) use ($request)
+                    {
+                         return   $q->whereDate('datePublication',$request->datePublication);
+                         
+                    })->when($request->niveauAcademique != null, function($q) use ($request)
+                    {
+                         return   $q->where('niveauAcademique',$request->niveauAcademique);
+                         
+                    }, function($q) use ($todayDate)
+                    {
+                        return   $q->whereDate('datePublication',$todayDate);
+                    })
+            ->whereDate('datePublication',$todayDate)->paginate(10);
+
+            
             return view('Acceuil.index',compact('documents'));   
         }
 
@@ -95,4 +118,8 @@ class DocumentController extends Controller
             $images = $documents->images;
             return view('admin.viewIdImage',compact('documents','images'));
         }
+
+
+        // 
+        
 }

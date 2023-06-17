@@ -173,7 +173,7 @@
                                         class="sidebar-text">Gestions utilisateurs</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route ('list-utilisateur')}}"><span
                                         class="sidebar-text-contracted">L</span> <span class="sidebar-text">Listes Les Utilisateurs</span></a></li>
-                                        <li class="nav-item"><a class="nav-link" href="tables/datatables.html"><span
+                                        <li class="nav-item"><a class="nav-link" href="{{ route('roles.index')}}"><span
                                             class="sidebar-text-contracted">G</span> <span
                                             class="sidebar-text">Roles et Permissions</span></a></li>
                         </ul>

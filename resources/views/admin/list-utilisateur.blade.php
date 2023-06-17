@@ -17,8 +17,19 @@
       <tr> 
         <td><span class="fw-normal">{{$item->name}}</span></td>
         <td><span class="fw-normal">{{$item->email}}</span></td>
-        <td><span class="fw-normal">/</span></td>
-        <td><span class="fw-normal">admin</span></td>
+        <td><span class="fw-normal">
+            @foreach ($item->roles as $role)
+                {{$role->name}}
+            @endforeach  
+        
+        </span></td>
+        <td>
+            @foreach ($item->permissions as $role)
+                <span class="btn btn-danger">
+                  {{$role->name}}
+                </span>
+             @endforeach  
+        </td>
         <td>
           <div class="btn-group"><button
               class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown"
