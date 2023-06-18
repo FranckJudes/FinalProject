@@ -19,4 +19,9 @@ class errorController extends Controller
     {
         return view("errors.500");
     }
+
+    public function page403()
+    {
+        return view("errors.403");
+    }
 }

@@ -8,7 +8,9 @@ use App\Models\Documents;
 use App\Models\Images;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
+    
 class DocumentController extends Controller
 {
 
@@ -20,7 +22,7 @@ class DocumentController extends Controller
 
 
     // La fonction D'upload Document et information 
-    public function uploadDoc(RequestDocuments  $request){
+    public function create(RequestDocuments  $request){
         
         $data = $request->validated();
         $txt = date("Y-m-d H:i:s");
@@ -67,7 +69,7 @@ class DocumentController extends Controller
         {
             
             // $documents =  Documents::all();
-            $todayDate =  Carbon::now()->format('Y-m-d');
+            // $todayDate =  Carbon::now()->format('Y-m-d');
             
             $documents = Documents::when($request->datePublication != null, function($q) use ($request)
                     {
@@ -77,11 +79,13 @@ class DocumentController extends Controller
                     {
                          return   $q->where('niveauAcademique',$request->niveauAcademique);
                          
-                    }, function($q) use ($todayDate)
+                    })->when($request->categorie != null, function($q) use ($request)
                     {
-                        return   $q->whereDate('datePublication',$todayDate);
+                         return   $q->where('categorie',$request->categorie);
+                         
                     })
-            ->whereDate('datePublication',$todayDate)->paginate(3);
+                   
+            ->paginate(3);
 
             
             return view('Acceuil.index',compact('documents'));   
@@ -100,7 +104,7 @@ class DocumentController extends Controller
 
 
         // Delete Doc
-        public function deleteDoc($id)
+        public function delete($id)
         {
             
             Documents::find($id)->delete();
@@ -127,4 +131,19 @@ class DocumentController extends Controller
             
         }
         
+
+
+        // Recherche par la barre de recherche
+        function rechercher(Request $request)
+        {
+            $documents = Documents::where('datePublication','Like','%'.$request->search.'%')
+            ->orWhere('description','Like','%'.$request->search.'%')
+            ->orWhere('categorie','Like','%'.$request->search.'%')
+            ->orWhere('niveauAcademique','Like','%'.$request->search.'%')
+            ->orWhere('titre','Like','%'.$request->search.'%')
+            ->orWhere('autheur','Like','%'.$request->search.'%')
+            ->paginate(3);
+            return view('Acceuil.index',compact('documents'));   
+        }
+
 }

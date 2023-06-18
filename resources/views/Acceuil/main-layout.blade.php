@@ -6,6 +6,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Babillard Numerique du departement Informatique</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{'/css2/styles.css'}}" rel="stylesheet" />
     </head>
@@ -34,27 +35,49 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">UNIVERSITE DE YAOUNDE I</h1>
+                    <h1 class="display-4 fw-bolder"> <i class="fa-solid fa-clipboard"></i> UNIVERSITE DE YAOUNDE I</h1>
                     <p class="lead fw-normal text-white-50 mb-0">DEPARTEMENT INFORMATIQUE - FACULTES DES SCIENCES</p>
                 </div>
             </div>
-           <form action="" method="get">
+           <form action="{{url('search')}}" method="post">
+            @csrf
+                {{-- Rechercher tous --}}
+                <div class="row " id="div2">
+                            <div class="col-lg-3 pt-5"></div>
+                            <div class="col-lg-6">
+                                <div class="text-center text-white ">
+                                    <input type="search" name="search"  class="form-control border-success rounded-pill" placeholder="search"/>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-lg-4"></div>
+                                    <div class="col-lg-4 pt-2">
+                                      <button class="form-control"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                    <div class="col-lg-4"></div>
+                               </div>
+                        <div class="col-lg-3"></div>
+                </div> 
+           </form>
                <div class="row">
                 <div class="col-lg-3 pt-5"></div>
                    <div class="col-lg-6">
                        <div class="text-center text-white ">
-                           <input type="search" name="search"  class="form-control border-success rounded-pill" placeholder="search"/>
+                                <span class="badge badge-secondary" id="show">Afficher le filtre</span>
                        </div>
                    </div>
                <div class="col-lg-3"></div>
-               </div>   
-               <div class="row text-center text-white">
-                   <div class="col-lg-3"></div>
-                        <div class="col-lg-3">
+               </div> 
+               <form action="" method="get">
+                @csrf
+               {{--  Filtrage de la requete  --}}
+               <div class="row text-center text-white" id="div1">
+                    <div class="col-md-3"></div>
+                        <div class="col-lg-2">
                             <label  class="form-label">En Fonction Date :</label>
                             <input type="date" name="datePublication" value="{{ Request::get('datePublication') ?? date('Y-m-d')}}" class="form-control">
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label  class="form-label">Selectionner la filiere :</label>
                                 <select name="niveauAcademique"  class="form-control">
                                     <option value="">ALL</option>
@@ -69,16 +92,31 @@
         
                             </select>
                         </div>
-                       <div class="col-lg-3"></div>
-                   </div>
-                   <div class="row mt-2">
-                    <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
-                            <input type="submit" class="form-control" value="Rechercher">
+                        <div class="col-lg-2">
+                            <label  class="form-label">Que recherchez-vous ?</label>
+                                <select name="categorie"  class="form-control">
+                                    <option value="">ALL</option>
+                                    <option value="Annonces"  {{ Request::get('categorie') == 'Annonces' ? 'selected' : ''}}>Annonces</option>
+                                    <option value="Liste Admin"  {{ Request::get('categorie') ==  'Liste Admin' ? 'selected' : ''}}>Liste Admin</option>
+                                    <option value="Emploi de Temps"  {{ Request::get('categorie') == 'Emploi de Temps' ? 'selected' : ''}}>Emploi de Temps</option>
+                                    <option value="Liste de Selection" {{ Request::get('categorie') == 'Liste de Selection' ? 'selected' : ''}}>Liste de Selection</option>
+                                    <option value="Avis de Recherche" {{ Request::get('categorie') == 'Avis de Recherche' ? 'selected' : ''}}>Avis de Recherche</option>
+                                    <option value="Notes" {{ Request::get('categorie') == 'Notes' ? 'selected' : ''}}>Notes</option>
+                                    <option value="Communique" {{ Request::get('categorie') == 'Communique' ? 'selected' : ''}}>Communique</option>
+        
+                            </select>
                         </div>
-                        <div class="col-lg-4"></div>
+                        <div class="col-md-3"></div>
+
+                        <div class="row mt-2">
+                         <div class="col-lg-4"></div>
+                             <div class="col-lg-4 pt-2">
+                               <button class="form-control"><i class="fa-solid fa-magnifying-glass"></i></button>
+                             </div>
+                             <div class="col-lg-4"></div>
+                        </div>
+                    </div> 
                    </div>
-               </div> 
             </form> 
            
         </header>
@@ -107,11 +145,32 @@
             scale : 0.5,
             reset : true
             });
-     
-
             sr.reveal('.card',{
                 depay : 1000
             },800)
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#div1').hide(); 
+
+            var display = 0;
+
+            $('#show').click(function(){
+
+               if (display == 0){
+
+                $('#div2').hide(); 
+                $('#div1').show(); 
+                display = 1;
+               }else{
+
+                $('#div2').show(); 
+                $('#div1').hide(); 
+                display = 0;
+               }
+            });
+        });
+
     </script>
 
 </html>

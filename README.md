@@ -4,8 +4,11 @@
 
 # description de la procedure a suivre
 #### PRESENTATION OF THE DATABASE
-1. Type table
-2. User table
+1. Table Documents
+2. Table utilisateurs
+3. Table roles
+4. Table permissions
+6. Table Images
 
 #### PACKAGES INSTALL
 

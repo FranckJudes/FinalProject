@@ -37,12 +37,13 @@ Route::get('visualiser',function(){
 Route::controller(DocumentController::class)->group(
     function(){
         Route::get('addDocument','index')->name('addDocument')->middleware('isAdmin');
-        Route::post('upload','uploadDoc')->name('upload');
+        Route::post('upload','create')->name('upload');
         Route::get('historiqueDoc','historique')->name('historiqueDoc')->middleware('isAdmin');
         Route::get('/','acceuil')->name("/");
         Route::get('viewID/{id}','viewImageId');
-        Route::get('deleteDoc/{id}','deleteDoc')->name("deleteDoc");
+        Route::get('deleteDoc/{id}','delete')->name("deleteDoc");
         Route::get('viewIdImage/{id}','viewIdImage')->name('');
+        Route::post('search','rechercher')->name('rechercher');
     }
 );
 
@@ -66,13 +67,14 @@ Route::controller(errorController::class)->group(
     function(){
         Route::get("404","index")->name("error404");
         Route::get("500","page500")->name("error500");
+        Route::get("403","page403")->name("error403");
     }
 );
 
 
 // Gestion de Role
 
- Route::resource('roles','App\Http\Controllers\Roles\RolesController');
+Route::resource('roles','App\Http\Controllers\Roles\RolesController');
 
 Route::controller(RolesController::class)->group(
     function(){

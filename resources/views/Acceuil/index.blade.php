@@ -8,7 +8,9 @@
         
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-          @forelse ($documents as $document)
+          {{-- @forelse ($documents as $document) --}}
+          @foreach ($documents as $document)
+
             @php
                     $images = $document->images;
             @endphp
@@ -20,7 +22,7 @@
                              
                                 <h5 class="fw-bolder">{{ $document->titre}}</h5>
                               
-                                    {{$document->description}}
+                                    {{$document->categorie}}
                                     <p>{{$document->niveauAcademique}}</p>
                                     {{$document->datePublication}}
                             </div>
@@ -31,9 +33,10 @@
                         </div>
                     </div>
                 </div>
-            @empty
-                   <h3> AUCUN DOCUMENTS POUR CE QUE VOUS CHERCHER</h3>
-             @endforelse
+            {{-- @empty
+                   <h3> AUCUN DOCUMENTS POUR CE QUE VOUS CHERCHER</h3> --}}
+             {{-- @endforelse --}}
+            @endforeach 
                 </div>
             </div>
         </div>
@@ -43,3 +46,4 @@
 </section>
     
 @endsection
+
