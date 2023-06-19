@@ -10,6 +10,13 @@ class PolicyDocument
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -41,7 +48,12 @@ class PolicyDocument
      */
     public function create(Utilisateur $user)
     {
-        //
+        if ($user->roles->contains('slug', 'content-editor')) {
+            return true;
+        }elseif($user->permissions->contains('slug', 'create')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -53,7 +65,15 @@ class PolicyDocument
      */
     public function update(Utilisateur $user, Documents $documents)
     {
-        //
+        if($user->roles->contains('slug', 'content-editor')){
+            return true;
+        } elseif($user->permissions->contains('slug', 'edit')) {
+            return true;
+        } elseif($documents->userId == $user->id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

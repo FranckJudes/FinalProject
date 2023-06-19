@@ -24,5 +24,32 @@ trait HasRoleAndPermissions
     {
         return $this->belongsToMany(Permission::class,'utilisateurs_permissions');
     }
-    
+
+    public function isAdmin()
+    {
+        if($this->roles->contains('slug', 'admin')){
+            return true;
+        }
+    }
+
+    public function hasRole($role)
+    {        
+        if( strpos($role, ',') !== false ){//check if this is an list of roles
+
+            $listOfRoles = explode(',',$role);
+
+            foreach ($listOfRoles as $role) {                    
+                if ($this->roles->contains('slug', $role)) {
+                    return true;
+                }
+            }
+        }else{                
+            if ($this->roles->contains('slug', $role)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
