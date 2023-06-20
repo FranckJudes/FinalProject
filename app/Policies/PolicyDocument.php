@@ -25,7 +25,7 @@ class PolicyDocument
      */
     public function viewAny(Utilisateur $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,12 @@ class PolicyDocument
      */
     public function view(Utilisateur $user, Documents $documents)
     {
-        //
+        if ($user->roles->contains('slug', 'admin')) {
+            return true;
+        }elseif($user->permissions->contains('slug', 'read')){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,7 +53,7 @@ class PolicyDocument
      */
     public function create(Utilisateur $user)
     {
-        if ($user->roles->contains('slug', 'content-editor')) {
+        if ($user->roles->contains('slug', 'admin')) {
             return true;
         }elseif($user->permissions->contains('slug', 'create')){
             return true;
@@ -65,7 +70,7 @@ class PolicyDocument
      */
     public function update(Utilisateur $user, Documents $documents)
     {
-        if($user->roles->contains('slug', 'content-editor')){
+        if($user->roles->contains('slug', 'admin')){
             return true;
         } elseif($user->permissions->contains('slug', 'edit')) {
             return true;
@@ -87,7 +92,7 @@ class PolicyDocument
     {
         if($user->permissions->contains('slug', 'delete')) {
             return true;
-        } elseif ($user->roles->contains('slug', 'content-editor')) {
+        } elseif ($user->roles->contains('slug', 'admin')) {
             return true;
         }
         return false;

@@ -53,9 +53,9 @@ Route::controller(UtilisateurController::class)->group(
         Route::get('listUtilisteur','index')->name('list-utilisateur');
         Route::get('ajoutUtilisateur','addPage')->name('ajoutUtilisateur');
         Route::post('ajoutUtilisateur','create')->name('addUser');
-        Route::get('removeUser/{id}','removeUser')->name('removeUser');
+        Route::get('removeUser/{id}','delete')->name('removeUser');
         Route::get('updateID/{id}','updatePage')->name('updateID');
-        Route::post('updateUser/{id}','updateUser')->name('updateUser');
+        Route::post('updateUser/{id}','update')->name('updateUser');
     }
 );
 

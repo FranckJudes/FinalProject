@@ -8,7 +8,9 @@ use App\Models\Documents;
 use App\Models\Images;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
     
 class DocumentController extends Controller
@@ -17,6 +19,7 @@ class DocumentController extends Controller
     // Page D'ajout de Documents
     public function index()
     {
+        //  dd(Auth::guard('utilisateur')->user()->can('update'));
         return view('admin.add-Document');
     }
 

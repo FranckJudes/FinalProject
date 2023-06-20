@@ -80,13 +80,13 @@ class UtilisateurController extends Controller
         return view('Admin.User.listUser',compact('data'));
     }
 
-    public function removeUser($id)
+    public function delete($id)
     {
         Utilisateur::find($id)->delete();
         return to_route('list-utilisateur');
     }
 
-    public function updateUser(Request $request,$id)
+    public function update(Request $request,$id)
     {
      $user = Utilisateur::find($id);
      $creditials = $request->validate([
