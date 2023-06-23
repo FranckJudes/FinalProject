@@ -17,8 +17,8 @@
                         @endif
                     </div>
                         <div class="mb-3"><label for="exampleInputIconLeft">Autheur</label>
-                            <div class="input-group"><input type="text" class="form-control" name="autheur" id="exampleInputIconLeft"
-                                placeholder="Autheur" aria-label="Search">
+                            <div class="input-group"><input type="text" class="form-control" name="autheur" id="exampleInputIconLeft" 
+                                placeholder="Autheur" aria-label="Search" value="{{auth()->guard('utilisateur')->user()->name." ".auth()->guard('utilisateur')->user()->lastname}}">
                             </div>
                             @if ($errors->has('autheur'))
                             <span class="text-danger">{{ $errors->first('autheur') }}</span>

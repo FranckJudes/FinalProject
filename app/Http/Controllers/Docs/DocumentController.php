@@ -15,18 +15,24 @@ use Illuminate\Support\Facades\DB;
     
 class DocumentController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Documents::class,'documents');    
+    // }
 
     // Page D'ajout de Documents
-    public function index()
+    public function create()
     {
-        //  dd(Auth::guard('utilisateur')->user()->can('update'));
+      
         return view('admin.add-Document');
     }
 
 
     // La fonction D'upload Document et information 
-    public function create(RequestDocuments  $request){
+    public function store(RequestDocuments  $request){
         
+        
+
         $data = $request->validated();
         $txt = date("Y-m-d H:i:s");
         
@@ -54,12 +60,12 @@ class DocumentController extends Controller
         
         
       
-        return redirect()->back()->with('success','Ajout avec success');
+        return to_route('historiqueDoc');
     }
 
 
     // Lister L'historique de tous les Documents
-    public function historique()
+    public function index()
         {
                 $documents = Documents::all();
                 // dd($documents);
@@ -96,7 +102,7 @@ class DocumentController extends Controller
 
         //Recuperer tous les images d'un Documents pour Afficher cote Etudiant
 
-        public function viewImageId($id)
+        public function edit($id)
         {
             //  dd($id);
             $documents = Documents::find($id);
@@ -147,6 +153,12 @@ class DocumentController extends Controller
             ->orWhere('autheur','Like','%'.$request->search.'%')
             ->paginate(3);
             return view('Acceuil.index',compact('documents'));   
+        }
+
+        function deletepage()
+        {
+            $documents = Documents::all();
+            return view('admin.Documents.delete',compact('documents'));
         }
 
 }

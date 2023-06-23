@@ -12,7 +12,7 @@ class PolicyDocument
 
     public function before($user, $ability)
     {
-        if ($user->isAdmin()) {
+        if ($user->roles->contains('slug', 'admin')) {
             return true;
         }
     }
@@ -37,6 +37,7 @@ class PolicyDocument
      */
     public function view(Utilisateur $user, Documents $documents)
     {
+      
         if ($user->roles->contains('slug', 'admin')) {
             return true;
         }elseif($user->permissions->contains('slug', 'read')){
@@ -70,14 +71,11 @@ class PolicyDocument
      */
     public function update(Utilisateur $user, Documents $documents)
     {
-        if($user->roles->contains('slug', 'admin')){
+        if ($user->roles->contains('slug', 'admin')) {
             return true;
-        } elseif($user->permissions->contains('slug', 'edit')) {
-            return true;
-        } elseif($documents->userId == $user->id) {
+        }elseif($user->permissions->contains('slug', 'update')){
             return true;
         }
-
         return false;
     }
 

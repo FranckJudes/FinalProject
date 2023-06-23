@@ -38,51 +38,32 @@
         <!-- Section-->
 
         <div class="text-center mt-5">
-            <a class="btn btn-primary large" href="{{url("/")}}">
-                Retour
+            <a class="btn btn-primary rounded-pill btn-lg btn-block" href="{{url("/")}}">
+                <i class="fa-solid fa-left-long"></i>  Retour
             </a>
         </div>
-        <div class="container bg-white rounded shadow p-5 mb-4 mt-4">
-            <div class="row">
-                <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
-                    <p class="mb-0 text-center text-lg-start"> QQQQQ<span class="current-year"></span> <a
-                            class="text-primary fw-normal" href="#" target="_blank"> vvvvvvvv</a>
-                    </p>
+        <div class="container bg-secondary  rounded shadow p-2 mb-2 mt-2">
+            <div class="row text-white">
+                <div class="col-12 col-md-4 col-xl-6 mb-md-0">
+                    Titre :     <p>{{ $documents->titre }}</p>
+                    Date Publication :     <p>{{ $documents->datePublication }}</p>
+                    Autheur :     <p>{{ $documents->autheur }}</p>
+                    Niveau Academique :     <p>{{ $documents->niveauAcademique }}</p>
+                    Description :     <p>{{ $documents->description }}</p>
                 </div>
                 <div class="col-12 col-md-8 col-xl-6 text-center text-lg-start">
                     <ul class="list-inline list-group-flush list-group-borderless text-md-end mb-0">
                       
-                        <li class="list-inline-item px-0 px-sm-2">Version 1.1
+                        <li class="list-inline-item px-0 px-sm-2">
+                            <a class="btn btn-primary" href="{{url('download',$documents->id)}}"> Download</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-     
-        
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                   
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                            Titre :     <p>{{ $documents->titre }}</p>
-                            Date Publication :     <p>{{ $documents->datePublication }}</p>
-                            Autheur :     <p>{{ $documents->autheur }}</p>
-                            Niveau Academique :     <p>{{ $documents->niveauAcademique }}</p>
-                            Description :     <p>{{ $documents->description }}</p>
-
-                        </div>
-                        <div class="col-md-3"></div>
-                    
-                </div>
-            </div>
-          </div>
-        <div class="container m-5">
+        <div class="container rounded shadow p-5 mb-4 mt-4">
             <div class="card">
                 <div class="card-body">
-                    <a class="btn btn-primary" href="{{url('download',$documents->id)}}"> Download</a>
                     <div class="row mt-4">
                         @foreach ($images as $image)
                             <div class="card text-white bg-secondary m-3 text-center" style="max-width:40em;">

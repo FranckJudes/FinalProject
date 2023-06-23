@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthentificationController;
 use App\Http\Controllers\Auth\dashboardController;
 use App\Http\Controllers\Docs\DocumentController;
 use App\Http\Controllers\Errors\errorController;
+use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Roles\RolesController;
 use App\Http\Controllers\Utilisateur\UtilisateurController;
 use Illuminate\Support\Facades\Route;
@@ -36,13 +37,14 @@ Route::get('visualiser',function(){
 // Le Groupe Groupe Route pour la Page d'ajout de Document
 Route::controller(DocumentController::class)->group(
     function(){
-        Route::get('addDocument','index')->name('addDocument')->middleware('isAdmin');
-        Route::post('upload','create')->name('upload');
-        Route::get('historiqueDoc','historique')->name('historiqueDoc')->middleware('isAdmin');
+        Route::get('addDocument','create')->name('addDocument')->middleware('isAdmin');
+        Route::post('upload','store')->name('upload');
+        Route::get('historiqueDoc','index')->name('historiqueDoc')->middleware('isAdmin');
         Route::get('/','acceuil')->name("/");
-        Route::get('viewID/{id}','viewImageId');
+        Route::get('viewID/{id}','edit');
         Route::get('deleteDoc/{id}','delete')->name("deleteDoc");
         Route::get('viewIdImage/{id}','viewIdImage')->name('');
+        Route::get('deletepage','deletepage')->name('deletepage');
         Route::post('search','rechercher')->name('rechercher');
     }
 );
@@ -81,3 +83,8 @@ Route::controller(RolesController::class)->group(
         Route::get("destroyRole","destroy");
     }
 );
+
+
+// 
+
+Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);
