@@ -328,9 +328,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg> New Plan</a>
-                <div class="btn-group ms-2 ms-lg-3"><button type="button"
-                        class="btn btn-sm btn-outline-gray-600">Share</button> <button type="button"
-                        class="btn btn-sm btn-outline-gray-600">Export</button></div>
+              
             </div>
         </div>
         <div class="table-settings mb-4">

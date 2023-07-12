@@ -37,11 +37,12 @@
                    <h3> AUCUN DOCUMENTS POUR CE QUE VOUS CHERCHER</h3> --}}
              {{-- @endforelse --}}
             @endforeach 
-                </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            {{ $documents->links() }}
+        </div>      
             </div>
         </div>
-                
-        {{ $documents->links() }}
     </div>
 </section>
     

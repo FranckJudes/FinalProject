@@ -4,8 +4,6 @@ namespace App\Http\Controllers\PDF;
 
 use App\Http\Controllers\Controller;
 use App\Models\Documents;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\App;
 use Dompdf\Dompdf;
 class PDFController extends Controller
 {
@@ -18,21 +16,23 @@ class PDFController extends Controller
         if(!$documents) abort(404);
         
         $images = $documents->images;
-        
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml(view('admin.dashboard'));
-        $dompdf->setPaper('A4','landScape');
 
-        $dompdf->render();
-        $dompdf->stream('deemo.pdf',['attachment'=>false]);
+        $datas = [
+                'images' => $images,
 
-        
-        // $string = '';        
-        // $pdf = App::make('dompdf.wrapper');
-        // $pdf->loadHTML($output);
+        ];
 
-        // return $pdf->stream();
-        
-    
+        $html = view('Acceuil.pdfGenerate',compact('images'))->render();
+       
+        $pdf = new Dompdf();
+        $pdf->loadHtml($html);
+        $pdf->setPaper('A4', 'portrait');
+            
+        // Rendez le contenu HTML en PDF
+        $pdf->render();
+
+        // Enregistrez le PDF sur le serveur
+        $pdf->stream('exemple.pdf');
+
     }
 }

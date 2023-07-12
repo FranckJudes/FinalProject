@@ -61,21 +61,37 @@
                 </div>
             </div>
         </div>
-        <div class="container rounded shadow p-5 mb-4 mt-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row mt-4">
-                        @foreach ($images as $image)
-                            <div class="card text-white bg-secondary m-3 text-center" style="max-width:40em;">
-                                <div class="">
-                                    <img src="/Documents_images/{{$image->image}}" class="card-img-top text-center">
-                                </div>
-                            </div>
-                        @endforeach
+
+            <div class="container">
+                <div class="row">
+                <div class="col-md-6">
+                    <div style="border-right: 1px solid #000; height: 100%;">
+                        Titre :     <p>{{ $documents->titre }}</p>
+                        Date Publication :     <p>{{ $documents->datePublication }}</p>
+                        Autheur :     <p>{{ $documents->autheur }}</p>
+                        Niveau Academique :     <p>{{ $documents->niveauAcademique }}</p>
+                        Description :     <p>{{ $documents->description }}</p>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <!-- Contenu de la deuxième colonne -->
+                </div>
+                </div>
             </div>
-        </div>
+            
+
+            <div class="container">
+                <div class="row justify-content-center">
+                <div class="col-md-6">
+                    @foreach ($images as $image)  
+                        <div class="card">
+                            <img src="/Documents_images/{{$image->image}}" class="card-img-top text-center">
+                        </div>
+                    @endforeach    
+                </div>
+                </div>
+            </div>
+            
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
