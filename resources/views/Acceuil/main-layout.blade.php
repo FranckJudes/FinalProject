@@ -10,7 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{'/css2/styles.css'}}" rel="stylesheet" />
-  
+        
     </head>
     <body>
         <!-- Navigation-->
@@ -24,9 +24,10 @@
                     </ul>
                     <form class="d-flex">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">S'identifier</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url('login')}}">Admin Login</a></li>
+                                <li><a class="dropdown-item" href="{{ url('login')}}">Se connecter</a></li>
+                                <li><a class="dropdown-item" href="{{ url('register')}}">S'inscrire</a></li>
                             </ul>
                         </li>
                     </form>

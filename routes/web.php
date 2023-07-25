@@ -16,6 +16,7 @@ Route::controller(AuthentificationController::class)->group(
     function(){
         Route::get('login','pageLogin')->name('PageLogin');
         Route::post('dologin','doLogin');
+        Route::get('register','pageRegister')->name('pageRegister');
     }
 );
 
@@ -78,13 +79,18 @@ Route::controller(errorController::class)->group(
 
 Route::resource('roles','App\Http\Controllers\Roles\RolesController');
 
+Route::resource('pdfUpload','App\Http\Controllers\PDF\PdfUploadController');
+
 Route::controller(RolesController::class)->group(
     function(){
         Route::get("destroyRole","destroy");
     }
 );
-
-
-// 
-
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);
+
+
+// Page Etudiant
+
+Route::get('Etudiant', function () {
+    return view('Students.index');
+});

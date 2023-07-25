@@ -15,11 +15,7 @@ use Illuminate\Support\Facades\DB;
     
 class DocumentController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Documents::class,'documents');    
-    // }
-
+    
     // Page D'ajout de Documents
     public function create()
     {
@@ -51,6 +47,7 @@ class DocumentController extends Controller
             {
                 $imageName = $data['titre'].'-image-'.time().rand(1,1000).'.'.$image->extension();
                 $image->move(public_path('Documents_images'),$imageName); 
+                // $image->storeAs('public',$imageName);
                 Images::create([
                   'documents_id' => $new_doc->id,
                   'image' => $imageName,
@@ -67,6 +64,14 @@ class DocumentController extends Controller
     // Lister L'historique de tous les Documents
     public function index()
         {
+                //  $user =  auth()->guard('utilisateur')->user();
+            
+                //  if ($user->role === 'admin') {
+                //     $elements = Documents::all();
+                // } else {
+                //     $elements = Documents::where('user_id', $user->id)->get();
+                // }
+                
                 $documents = Documents::all();
                 // dd($documents);
                 return view('admin.historiqueDocument',compact('documents'));
@@ -77,9 +82,7 @@ class DocumentController extends Controller
         public function acceuil(Request $request)
         {
             
-            // $documents =  Documents::all();
-            // $todayDate =  Carbon::now()->format('Y-m-d');
-            
+          
             $documents = Documents::when($request->datePublication != null, function($q) use ($request)
                     {
                          return   $q->whereDate('datePublication',$request->datePublication);
@@ -94,7 +97,7 @@ class DocumentController extends Controller
                          
                     })
                    
-            ->paginate(3);
+            ->paginate(6);
 
             
             return view('Acceuil.index',compact('documents'));   
@@ -117,8 +120,8 @@ class DocumentController extends Controller
         {
             
             Documents::find($id)->delete();
-
-            return redirect('historiqueDoc')->with('success','Suppression avec succes');
+            $documents = Documents::all();
+            return view('admin.Documents.delete',compact('documents'));
         }
 
         // Recuperer tous les images d'un Documents pour Afficher cote Administration
@@ -151,7 +154,7 @@ class DocumentController extends Controller
             ->orWhere('niveauAcademique','Like','%'.$request->search.'%')
             ->orWhere('titre','Like','%'.$request->search.'%')
             ->orWhere('autheur','Like','%'.$request->search.'%')
-            ->paginate(3);
+            ->paginate(6);
             return view('Acceuil.index',compact('documents'));   
         }
 

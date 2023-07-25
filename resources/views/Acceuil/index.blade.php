@@ -15,8 +15,8 @@
                     $images = $document->images;
             @endphp
                 <div class="col mb-5">
-                    <div class="card h-100">
-                            <img class="card-img-top" src="Documents_images/{{$images->first()->image}}" alt="..." /> 
+                    <div class="card h-100" style="width:200px;height:100px;overflow:hidden"> 
+                            {{-- <img class="card-img-top" src="/Documents_images/{{$images->first()->image}}" alt="..."  style="width:100%;height:auto;"/>  --}}
                         <div class="card-body p-4">
                             <div class="text-center">
                              

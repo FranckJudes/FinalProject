@@ -32,35 +32,17 @@ trait HasRoleAndPermissions
         }
     }
 
-    // public function hasRole($role)
-    // {        
-    //     if( strpos($role, ',') !== false ){//check if this is an list of roles
-
-    //         $listOfRoles = explode(',',$role);
-
-    //         foreach ($listOfRoles as $role) {                    
-    //             if ($this->roles->contains('slug', $role)) {
-    //                 return true;
-    //             }
-    //         }
-    //     }else{                
-    //         if ($this->roles->contains('slug', $role)) {
-    //             return true;
-    //         }
-    //     }
-
-    //     return false;
-    // }
+  
 
     public function givePermissionsTo(... $permissions) {
 
         $permissions = $this->getAllPermissions($permissions);
-        dd($permissions);
+        
         if($permissions === null) {
-        return $this;
+          return $this;
         }
         $this->permissions()->saveMany($permissions);
-        return $this;
+          return $this;
   }
 
 

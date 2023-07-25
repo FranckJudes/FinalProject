@@ -55,7 +55,7 @@
                     <ul class="list-inline list-group-flush list-group-borderless text-md-end mb-0">
                       
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a class="btn btn-primary" href="{{url('download',$documents->id)}}"> Download</a>
+                            <a class="btn btn-primary" href="{{url('generate-pdf',$documents->id)}}"> Download</a>
                         </li>
                     </ul>
                 </div>

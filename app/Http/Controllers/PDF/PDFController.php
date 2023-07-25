@@ -4,7 +4,7 @@ namespace App\Http\Controllers\PDF;
 
 use App\Http\Controllers\Controller;
 use App\Models\Documents;
-use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 class PDFController extends Controller
 {
     public function generatePDF($id)
@@ -21,18 +21,19 @@ class PDFController extends Controller
                 'images' => $images,
 
         ];
-
-        $html = view('Acceuil.pdfGenerate',compact('images'))->render();
-       
-        $pdf = new Dompdf();
-        $pdf->loadHtml($html);
-        $pdf->setPaper('A4', 'portrait');
+        
+        $contxt = stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed'=> TRUE
+                ]
+            ]);
+            $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf->getDomPDF()->setHttpContext($contxt);
             
-        // Rendez le contenu HTML en PDF
-        $pdf->render();
-
-        // Enregistrez le PDF sur le serveur
-        $pdf->stream('exemple.pdf');
+            $pdf->loadView('Acceuil.pdfGenerate', compact('images'));
+            return $pdf->download('data.pdf');
 
     }
 }

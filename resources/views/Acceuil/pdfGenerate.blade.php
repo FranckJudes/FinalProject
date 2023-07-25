@@ -10,19 +10,16 @@
             <link href="{{'/css2/styles.css'}}" rel="stylesheet" />
     </head>
     <body>
-
+      
         </div>
         <div class="container rounded shadow p-5 mb-4 mt-4">
             <div class="card">
                 <div class="card-body">
                     <div class="row mt-4">
                         @foreach ($images as $image)
-    
-                            <div class="card text-white bg-secondary m-3 text-center" style="max-width:40em;">
-                                <div class="">
-                                        <img src="/Documents_images/{{$image->image}}" class="card-img-top text-center">
-                                </div>
-                            </div>
+
+                                    <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents(base_path('public/Documents_images/'.$image->image ))); ?>" alt="">                               
+                                
                         @endforeach 
                     </div>
                 </div>

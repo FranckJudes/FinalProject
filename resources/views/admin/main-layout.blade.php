@@ -172,7 +172,7 @@
                         </ul>
                     </div>
                 </li>
-
+           
                
                 <li class="nav-item">
                     <span class="nav-link collapsed d-flex justify-content-between align-items-center"
@@ -195,36 +195,44 @@
                     </span>
                     <div class="multi-level collapse" role="list" id="submenu-components" aria-expanded="false">
                         <ul class="flex-column nav">
-                          @if (auth()->guard('utilisateur')->user()->can('create','App\\Models\Documents'))
+                          {{-- @if (auth()->guard('utilisateur')->user()->can('create','App\\Models\Documents')) --}}
 
                                 <li class="nav-item"><a class="nav-link" href="{{url('addDocument')}}"><span
                                             class="sidebar-text-contracted">F</span> <span
-                                            class="sidebar-text">Ajout Documents</span></a>
+                                            class="sidebar-text">Ajouter Images</span></a>
                                 </li>
 
-                            @endif
-                            @if (auth()->guard('utilisateur')->user()->can('read','App\\Models\Documents')) 
+                            {{-- @endif --}}
+                        
+
+                                <li class="nav-item"><a class="nav-link" href="{{url('pdfUpload/create ')}}"><span
+                                            class="sidebar-text-contracted">F</span> <span
+                                            class="sidebar-text">Ajouter PDF</span></a>
+                                </li>
+
+                         
+                            {{-- @if (auth()->guard('utilisateur')->user()->can('read','App\\Models\Documents'))  --}}
                                 <li class="nav-item"><a class="nav-link" href="{{ url('historiqueDoc')}}"><span
                                             class="sidebar-text-contracted">H</span> <span
                                             class="sidebar-text">Historique Documents</span></a>
                                 </li>
-                            @endif
-                            @if (auth()->guard('utilisateur')->user()->can('delete','App\\Models\Documents'))
+                            {{-- @endif --}}
+                            {{-- @if (auth()->guard('utilisateur')->user()->can('delete','App\\Models\Documents')) --}}
                                 <li class="nav-item"><a class="nav-link" href="{{ url('deletepage')}}"><span
                                     class="sidebar-text-contracted">S</span> <span
                                     class="sidebar-text">Supprimer Documents</span></a>
                                 </li>
-                            @endif  
-                            @if (auth()->guard('utilisateur')->user()->can('update','App\\Models\Documents'))
+                            {{-- @endif   --}}
+                            {{-- @if (auth()->guard('utilisateur')->user()->can('update','App\\Models\Documents')) --}}
                                 <li class="nav-item"><a class="nav-link" href="{{ url('deletepage')}}"><span
                                     class="sidebar-text-contracted">M</span> <span
                                     class="sidebar-text">Mette a jour</span></a>
                                 </li>
-                            @endif    
+                            {{-- @endif     --}}
                         </ul>
                     </div>  
                 </li>
-                         @if (auth()->guard('utilisateur')->user()->roles->contains('slug', 'admin'))
+                         {{-- @if (auth()->guard('utilisateur')->user()->roles->contains('slug', 'admin')) --}}
                             <li class="nav-item"><a href="{{ route('roles.index')}}"
                                 class="nav-link d-flex align-items-center justify-content-between"><span><span class="sidebar-icon"><svg
                                     class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -233,10 +241,17 @@
                                     </path>
                                     </svg> </span><span class="sidebar-text">Role et Permission</span></span></a>
                             </li>
-                         @endif   
+                         {{-- @endif    --}}
                 
+                         <li class="nav-item"><a href="kanban.html"
+                             class="nav-link d-flex align-items-center justify-content-between"><span><span class="sidebar-icon"><svg
+                                   class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                   <path
+                                     d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                   </path>
+                                 </svg> </span><span class="sidebar-text">Categorie</span></span></a>
+                         </li>
             </ul>
-            
         </div>
         
     </nav>
@@ -274,7 +289,8 @@
                                         alt="Image placeholder"
                                         src="https://demo.themesberg.com/volt-pro/assets/img/team/profile-picture-3.jpg">
                                     <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span
-                                            class="mb-0 font-small fw-bold text-gray-900">{{auth()->guard('utilisateur')->user()->name." ".auth()->guard('utilisateur')->user()->lastname}}</span></div>
+                                            class="mb-0 font-small fw-bold text-gray-900">
+                                            {{-- {{auth()->guard('utilisateur')->user()->name." ".auth()->guard('utilisateur')->user()->lastname}}</span></div> --}}
                                 </div>
                             </a>
                             <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1"><a

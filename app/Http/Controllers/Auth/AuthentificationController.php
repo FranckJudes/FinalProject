@@ -23,7 +23,18 @@ class AuthentificationController extends Controller
                 return view('auth.sign-in');
         }
 
-
+        public function pageRegister()
+                {
+                
+                        // Utilisateur::create([
+                        //         'name' => 'Gallagher',
+                        //         'lastname' => 'jiemounN' ,
+                        //         'email' => 'test@gmail.com',
+                        //         'password' => Hash::make('1234')  
+                        // ]);
+                        return view('auth.sign-up');
+                }
+                
         // Create Login User 
         public function doLogin(RequestLogin $request)
 
