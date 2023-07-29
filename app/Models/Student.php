@@ -1,26 +1,23 @@
 <?php
 
 namespace App\Models;
-use App\Traits\HasRoleAndPermissions;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Utilisateur extends Authenticatable
+class Student extends Authenticatable
 {
-    use HasFactory,HasRoleAndPermissions;
+    use HasFactory;
 
     protected $fillable = [
         'name',
         'lastname',
         'email',
+        'niveauAcademique',
+        'matricule',
         'password',
     ];
 
-    public function documents()
-    {
-        return 
-            $this->hasMany(Documents::class);  
-    }
-
+   
 }

@@ -15,4 +15,17 @@ class Documents extends Model
         return 
             $this->hasMany(Images::class);  
     }
+
+    public function pdf()
+    {
+        return 
+            $this->hasOne(Pdf::class);  
+    }
+
+   
+    // public function utilisateur()
+    // {
+    //     return $this->belongsTo(Utilisateur::class);
+    // }
+    
 }

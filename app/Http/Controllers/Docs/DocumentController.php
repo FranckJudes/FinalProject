@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestDocuments;
 use App\Models\Documents;
 use App\Models\Images;
+use App\Models\Utilisateur;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +37,11 @@ class DocumentController extends Controller
         $new_doc = Documents::create([
             'titre' => $request->titre,
             'description' => $request->description,
-            'autheur' => $request->autheur,
+            'utilisateur_id' => $request->autheur,
             'datePublication' => $txt,
             'niveauAcademique' => $request->niveauAcademique,
-            'categorie' =>  $request->categorie
+            'categorie' =>  $request->categorie,
+            'dateLimite' => $request->dateLimite,
         ]);
         // Enregistrement de L'image 
         if ($request->has('images')) {
@@ -64,17 +66,20 @@ class DocumentController extends Controller
     // Lister L'historique de tous les Documents
     public function index()
         {
-                //  $user =  auth()->guard('utilisateur')->user();
+                 $user =  auth()->guard('utilisateur')->user();
             
-                //  if ($user->role === 'admin') {
-                //     $elements = Documents::all();
-                // } else {
-                //     $elements = Documents::where('user_id', $user->id)->get();
-                // }
+                 if ($user->roles->contains('slug', 'admin')){
+                    $documents = Documents::all();
+                } else {
+                    $documents = Documents::where('utilisateur_id', $user->id)->get();
+                }
                 
-                $documents = Documents::all();
-                // dd($documents);
-                return view('admin.historiqueDocument',compact('documents'));
+                // $user = Utilisateur::with('documents')->find($user)->get();
+                // $user = $documents->images;
+                //  return $user;
+                
+               
+                return view('admin.historiqueDocument',compact('documents','user'));
         }
 
         // page d'acceuil de l'Etudiant et Recherche
@@ -95,9 +100,10 @@ class DocumentController extends Controller
                     {
                          return   $q->where('categorie',$request->categorie);
                          
-                    })
+                    })->orWhere('niveauAcademique', 'ALL')
                    
-            ->paginate(6);
+                   
+            ->paginate(8);
 
             
             return view('Acceuil.index',compact('documents'));   
@@ -110,8 +116,28 @@ class DocumentController extends Controller
             //  dd($id);
             $documents = Documents::find($id);
             if(!$documents) abort(404);
+
+            
             $images = $documents->images;
-            return view('Acceuil.visualiserImage',compact('documents','images'));
+
+            
+            $pdf = $documents->pdf;
+
+
+            if($documents->pdf){
+             
+                  return view('Acceuil.visualiserImage', compact('documents', 'pdf'))->with('message','pdf');
+
+                
+                }elseif ($documents->images) {
+                    
+                    return view('Acceuil.visualiserImage', compact('documents', 'images'))->with('message','images');
+                } else {
+                   
+                    return redirect()->route('Students.viewdoc')->with('error', 'Type de fichier inconnu.');
+            }
+            
+            // return view('Acceuil.visualiserImage',compact('documents','images'));
         }
 
 
@@ -132,6 +158,7 @@ class DocumentController extends Controller
             if(!$documents) abort(404);
             
             $images = $documents->images;
+            
             return view('admin.viewIdImage',compact('documents','images'));
         }
 
@@ -148,13 +175,13 @@ class DocumentController extends Controller
         // Recherche par la barre de recherche
         function rechercher(Request $request)
         {
+            $categorie = "ALL";
             $documents = Documents::where('datePublication','Like','%'.$request->search.'%')
             ->orWhere('description','Like','%'.$request->search.'%')
-            ->orWhere('categorie','Like','%'.$request->search.'%')
+            ->orWhere('categorie','Like','%'.$categorie.'%')
             ->orWhere('niveauAcademique','Like','%'.$request->search.'%')
             ->orWhere('titre','Like','%'.$request->search.'%')
-            ->orWhere('autheur','Like','%'.$request->search.'%')
-            ->paginate(6);
+            ->paginate(8);
             return view('Acceuil.index',compact('documents'));   
         }
 

@@ -4,7 +4,7 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>FAQs | Dason - Admin & Dashboard Template</title>
+        <title> Dashboard </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -34,21 +34,21 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{ route('dashboardStudent')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm.svg" alt="" height="30">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dason</span>
+                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dashboard</span>
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{ route('dashboardStudent')}}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm.svg" alt="" height="30">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dason</span>
+                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Dashboard</span>
                                 </span>
                             </a>
                         </div>
@@ -95,16 +95,23 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
-                                    alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium">Paul K.</span>
+                                
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium">
+                                    {{auth()->guard('student')->user()->name." ".auth()->guard('student')->user()->lastname}}
+
+                                </span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <a class="dropdown-item" href="apps-contacts-profile.html"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="auth-logout.html"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                                <form  action="{{route('logout')}}"  method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="dropdown-item"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</button>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -123,7 +130,7 @@
                             <li class="menu-title" data-key="t-menu">Menu</li>
 
                             <li>
-                                <a href="index.html">
+                                <a href="{{ route('dashboardStudent')}}">
                                     <i data-feather="home"></i>
                                     <span data-key="t-dashboard">Dashboard</span>
                                 </a>
@@ -133,8 +140,8 @@
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow">
-                                    <i data-feather="shopping-cart"></i>
-                                    <span data-key="t-ecommerce">Ecommerce</span>
+                                    <i data-feather="layers"></i>   
+                                    <span data-key="t-ecommerce">Categorie</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="ecommerce-products.html" key="t-products">Products</a></li>
@@ -145,7 +152,7 @@
                             <li>
                                 <a href="apps-chat.html">
                                     <i data-feather="message-square"></i>
-                                    <span data-key="t-chat">Chat</span>
+                                    <span data-key="t-chat">Notification</span>
                                 </a>
                             </li>
                             <li class="menu-title" data-key="t-pages">Pages</li>
@@ -156,8 +163,11 @@
                                     <span data-key="t-authentication">Authentication</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="auth-login.html" data-key="t-login">Login</a></li>
-                                    <li><a href="auth-two-step-verification.html" data-key="t-two-step-verification">Two Step Verification</a></li>
+                                    <form  action="{{route('logout')}}"  method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <li><a href="auth-login.html" data-key="t-login">Deconnecter</a></li>
+                                    </form>   
                                 </ul>
                             </li>
                         </ul>
@@ -189,13 +199,14 @@
                                         <div class="row justify-content-center mt-3">
                                             <div class="col-xl-5 col-lg-8">
                                                 <div class="text-center">
-                                                    <h5>Can't find what you are looking for?</h5>
-                                                    <p class="text-muted">If several languages coalesce, the grammar of the resulting language
-                                                        is more simple and regular than that of the individual</p>
+                                                    <h1>BABILLARD NUMERIQUE</h1>
+                                                    <h5>   <input type="search" name="search"  id="form-lg-input" class="form-control border-success rounded-pill" placeholder="search"/></h5>
+                                                    <p class="text-muted">Rechercher en fonction de  notre filiere</p>
                                                     <div>
-                                                        <button type="button" class="btn btn-primary mt-2 me-2 waves-effect waves-light">Email
-                                                            Us</button>
-                                                        <button type="button" class="btn btn-success mt-2 waves-effect waves-light">Send us a
+                                                        <button type="button" class="btn btn-primary mt-2 me-2 waves-effect waves-light">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                                        </button>
+                                                        <button type="button" class="btn btn-success mt-2 waves-effect waves-light">Filtrer
                                                             tweet</button>
                                                     </div>
                                                 </div>
@@ -203,196 +214,57 @@
                                             <!-- end col -->
                                         </div>
                                         <!-- end row -->
-
+                                        
                                         <div class="row mt-5">
+                                            
+                                           
+                                            
+                                             @forelse  ($documents as $document)
                                             <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
+                                                    <div class="card">
+                                                        <div class="card-body overflow-hidden position-relative">
+                                                            <div>
+                                                                <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <div class="faq-count">
+                                                                    <div class="avatar-sm m-auto">
+                                                                        <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
+                                                                            {{ $loop->iteration }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-1 ms-3">
+                                                                     <h5 class="mt-2">{{ $document->titre}}</h5>
+                                                                    <p class="text-muted mt-3 mb-0">{{$document->description}}</p>
+                                                                    
+                                                                        <div class="mt-4">
+                                                                            <a href="{{url('visualiser',$document->id)}}" class="text-primary fw-medium"> <u>visualiser </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
+                                                                        </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        1
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">What is Lorem Ipsum?</h5>
-                                                                <p class="text-muted mt-3 mb-0">New common language will be more simple and 
-                                                                    regular than the existing European languages. It will be as simple as occidental.</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
+                                                        <!-- end card body -->
                                                     </div>
-                                                    <!-- end card body -->
+                                                    <!-- end card -->
                                                 </div>
-                                                <!-- end card -->
-                                            </div>
-                                            <!-- end col -->
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
-                                                        </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        2
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">Where does it come from?</h5>
-                                                                <p class="text-muted mt-3 mb-0">Everyone realizes why a new common language would be 
-                                                                    desirable one could refuse to pay expensive translators.</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                    <!-- end card body -->
+                                    @empty
+                                    <div class="col-xl-4 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body overflow-hidden position-relative">
+                                                <div>
+                                                    <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
                                                 </div>
-                                                <!-- end card -->
-                                            </div>
-                                            <!-- end col -->
-                            
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
-                                                        </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        3
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">Where can I get some?</h5>
-                                                                <p class="text-muted mt-3 mb-0">If several languages coalesce, the grammar of the 
-                                                                    resulting language is more simple and regular than that of the individual languages.</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                    <!-- end card body -->
+                                                <div class="d-flex">
+                                                    <h1>AUCUNE PUBLICATION POUR L'INSTANT</h1>
                                                 </div>
-                                                <!-- end card -->
                                             </div>
-                                            <!-- end col -->
-
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
-                                                        </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        4
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">Why do we use it?</h5>
-                                                                <p class="text-muted mt-3 mb-0">Their separate existence is a myth. For science, music,
-                                                                    sport, etc, Europe uses the same vocabulary.</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                    <!-- end card body -->
-                                                </div>
-                                                <!-- end card -->
-                                            </div>
-                                            <!-- end col -->
-                            
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
-                                                        </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        5
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">Where can I get some?</h5>
-                                                                <p class="text-muted mt-3 mb-0">The point of using Lorem Ipsum is that it has a 
-                                                                    more-or-less normal they distribution of letters opposed to using content here.</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                    <!-- end card body -->
-                                                </div>
-                                                <!-- end card -->
-                                            </div>
-                                            <!-- end col -->
-                            
-                                            <div class="col-xl-4 col-sm-6">
-                                                <div class="card">
-                                                    <div class="card-body overflow-hidden position-relative">
-                                                        <div>
-                                                            <i class="bx bx-help-circle widget-box-1-icon text-primary"></i>
-                                                        </div>
-                                                         <div class="d-flex">
-                                                            <div class="faq-count">
-                                                                <div class="avatar-sm m-auto">
-                                                                    <span class="avatar-title rounded-circle bg-primary text-white font-size-16">
-                                                                        6
-                                                                    </span>
-                                                                </div>
-                                                             </div>
-                                                             <div class="flex-1 ms-3">
-                                                                <h5 class="mt-2">What is Lorem Ipsum?</h5>
-                                                                <p class="text-muted mt-3 mb-0">To an English person, it will seem like simplified English,
-                                                                    as a skeptical Cambridge friend of mine told me what Occidental</p>
-
-                                                                <div class="mt-4">
-                                                                    <a href="#" class="text-primary fw-medium"> <u>Read More </u> <i class="mdi mdi-arrow-right ms-1 align-middle"></i></a>
-                                                                </div>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                    <!-- end card body -->
-                                                </div>
-                                                <!-- end card -->
-                                            </div>
-                                            <!-- end col -->
+                                            <!-- end card body -->
                                         </div>
-                                        <!-- end row -->
-                            </div>
-                            <!-- end col -->
+                                        <!-- end card -->
+                                    </div>  <!-- end col -->
+                                    @endforelse
+                          
                         </div>
                         <!-- end row -->
 
@@ -441,11 +313,11 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Dason.
+                                <script>document.write(new Date().getFullYear())</script> © Departement Informatique
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-end d-none d-sm-block">
-                                    Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
+                                    Universite de yaounde I
                                 </div>
                             </div>
                         </div>
@@ -474,18 +346,7 @@
                 <hr class="m-0" />
 
                 <div class="p-4">
-                    <h6 class="mb-3">Layout</h6>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="layout"
-                            id="layout-vertical" value="vertical">
-                        <label class="form-check-label" for="layout-vertical">Vertical</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="layout"
-                            id="layout-horizontal" value="horizontal">
-                        <label class="form-check-label" for="layout-horizontal">Horizontal</label>
-                    </div>
-
+        
                     <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
 
                     <div class="form-check form-check-inline">

@@ -25,7 +25,7 @@
         <td><span class="fw-normal">{{$item->description}}</span></td>
         <td><span class="fw-normal">{{$item->datePublication}}</span></td>
         <td><span class="fw-normal">{{$item->images->count()}}</span></td>
-        <td><span class="fw-normal">{{$item->autheur}}</span></td>
+        <td><span class="fw-normal">/</span></td>
         <td><span class="fw-normal">{{$item->niveauAcademique}}</span></td>
         <td>
           <div class="btn-group"><button

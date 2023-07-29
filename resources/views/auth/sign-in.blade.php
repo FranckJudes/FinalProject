@@ -182,7 +182,7 @@
                                     </svg></a></div>
                             <div class="d-flex justify-content-center align-items-center mt-4"><span
                                     class="fw-normal">Not registered?
-                                    <a href="#" class="fw-bold">Create account</a></span></div>
+                                    <a href="{{ url('register')}}" class="fw-bold">Create account</a></span></div>
                         </div>
                     </div>
                 </div>

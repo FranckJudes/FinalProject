@@ -65,7 +65,7 @@ class PdfUploadController extends Controller
             ]);
     
     
-            return redirect()->back();
+            return to_route('historiqueDoc');
         }
     }
 

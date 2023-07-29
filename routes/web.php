@@ -6,6 +6,7 @@ use App\Http\Controllers\Docs\DocumentController;
 use App\Http\Controllers\Errors\errorController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Roles\RolesController;
+use App\Http\Controllers\Utilisateur\StudentController;
 use App\Http\Controllers\Utilisateur\UtilisateurController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,15 @@ Route::controller(dashboardController::class)->group(
     function(){
         Route::get('dashboard','dashboard')->name('dashboard')->middleware('isAdmin');
         Route::delete('logout','logout')->name('logout')->middleware('isAdmin');
+       
+    }
+);
+
+
+Route::controller(StudentController::class)->group(
+    function(){
+        Route::get('dashboardStudent','dashboardStudent')->name('dashboardStudent');
+        Route::get('visualiser/{id}','visualiserPDFImage')->name('visualiserPDFImage');
        
     }
 );
@@ -81,6 +91,9 @@ Route::resource('roles','App\Http\Controllers\Roles\RolesController');
 
 Route::resource('pdfUpload','App\Http\Controllers\PDF\PdfUploadController');
 
+Route::resource('students','App\Http\Controllers\Utilisateur\StudentController');
+
+
 Route::controller(RolesController::class)->group(
     function(){
         Route::get("destroyRole","destroy");
@@ -88,9 +101,4 @@ Route::controller(RolesController::class)->group(
 );
 Route::get('generate-pdf/{id}', [PDFController::class, 'generatePDF']);
 
-
-// Page Etudiant
-
-Route::get('Etudiant', function () {
-    return view('Students.index');
-});
+Route::get('download-document/{id}', 'App\Http\Controllers\Utilisateur\StudentController@downloadDocument')->name('download.document');

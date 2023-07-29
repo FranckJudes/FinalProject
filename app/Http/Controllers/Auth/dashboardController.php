@@ -13,11 +13,11 @@ class dashboardController extends Controller
     // View template dashoard
    public function dashboard()
    {
-        $countUtilisateur =  Utilisateur::all();
-        $countRole =  Role::all();
-        $countDocuments =  Documents::all();
+        $countUtilisateur =  Utilisateur::count();
+        $countRole =  Role::count();
+        $countDocuments =  Documents::count();
         
-        return view('admin.dashboard',compact('countUtilisateur'));
+        return view('admin.dashboard',compact('countUtilisateur','countRole','countDocuments'));
    }
 
 

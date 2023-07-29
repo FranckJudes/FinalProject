@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-left-long"></i>  Retour
             </a>
         </div>
-        <div class="container bg-secondary  rounded shadow p-2 mb-2 mt-2">
+        <div class="container bg-secondary  rounded shadow p-2 mb-2 mt-2 border-right: 1px solid #000; height: 100%;">
             <div class="row text-white">
                 <div class="col-12 col-md-4 col-xl-6 mb-md-0">
                     Titre :     <p>{{ $documents->titre }}</p>
@@ -63,34 +63,25 @@
         </div>
 
             <div class="container">
-                <div class="row">
-                <div class="col-md-6">
-                    <div style="border-right: 1px solid #000; height: 100%;">
-                        Titre :     <p>{{ $documents->titre }}</p>
-                        Date Publication :     <p>{{ $documents->datePublication }}</p>
-                        Autheur :     <p>{{ $documents->autheur }}</p>
-                        Niveau Academique :     <p>{{ $documents->niveauAcademique }}</p>
-                        Description :     <p>{{ $documents->description }}</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Contenu de la deuxième colonne -->
-                </div>
-                </div>
-            </div>
-            
-
-            <div class="container">
                 <div class="row justify-content-center">
                 <div class="col-md-6">
-                    @foreach ($images as $image)  
-                        <div class="card">
-                            <img src="/Documents_images/{{$image->image}}" class="card-img-top text-center">
-                        </div>
-                    @endforeach    
+                    @if (isset($message))    
+                        @if ($message === 'pdf')
+                                <iframe src="{{ asset('storage/' . $pdf->path) }}" width="100%" height="500px"></iframe>
+                        @elseif ($message === 'images')   
+                            @foreach ($images as $image)  
+                            <div class="d-flex justify-content p-4">
+                                <img src="/Documents_images/{{$image->image}}"  width="70%">
+
+                            </div>
+                            @endforeach
+                        @endif
+                    @endif
                 </div>
                 </div>
-            </div>
+            </div> 
+
+          
             
         <!-- Footer-->
         <footer class="py-5 bg-dark">

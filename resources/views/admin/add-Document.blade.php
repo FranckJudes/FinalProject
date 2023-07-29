@@ -17,8 +17,9 @@
                         @endif
                     </div>
                         <div class="mb-3"><label for="exampleInputIconLeft">Autheur</label>
-                            <div class="input-group"><input type="text" class="form-control" name="autheur" id="exampleInputIconLeft" 
-                                placeholder="Autheur" aria-label="Search" value="{{auth()->guard('utilisateur')->user()->name." ".auth()->guard('utilisateur')->user()->lastname}}">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="autheur" id="exampleInputIconLeft" 
+                                placeholder="Autheur" aria-label="Search" value="{{auth()->guard('utilisateur')->user()->id}}" >
                             </div>
                             @if ($errors->has('autheur'))
                             <span class="text-danger">{{ $errors->first('autheur') }}</span>
@@ -35,6 +36,8 @@
                         <div class="mb-4"><label class="my-1 me-2" for="country">niveau Academique</label> <select class="form-select"
                             id="country" aria-label="Default select example" name="niveauAcademique">
                             <option selected="selected" disabled>Niveau Academique</option>
+                            <option>ALL</option>
+
                             <option>ICTL1</option>
                             <option>ICTL2</option>
                             <option>ICTL3</option>
@@ -68,6 +71,12 @@
                             @error('images')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
+                        </div>
+                        <div class="my-4"><label for="textarea">Date Limite</label> <input type="date" class="form-control"
+                            name="dateLimite">
+                            @if ($errors->has('description'))
+                                <span class="text-danger">{{ $errors->first('description') }}</span>
+                            @endif
                         </div>
                         </div>
                         <input class="btn btn-primary" type="submit" value="sauvegarder">
